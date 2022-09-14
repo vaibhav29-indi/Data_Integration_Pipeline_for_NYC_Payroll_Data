@@ -1,0 +1,59 @@
+{
+	"name": "dataflow_synapseempdb",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "ds_empmaster",
+						"type": "DatasetReference"
+					},
+					"name": "dfadlsempmaster"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "ds_synapse_nycpayroll_empmd",
+						"type": "DatasetReference"
+					},
+					"name": "dfsynapseempdb"
+				}
+			],
+			"transformations": [],
+			"scriptLines": [
+				"source(output(",
+				"          EmployeeID as string,",
+				"          LastName as string,",
+				"          FirstName as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> dfadlsempmaster",
+				"dfadlsempmaster sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     input(",
+				"          EmployeeID as string,",
+				"          LastName as string,",
+				"          FirstName as string",
+				"     ),",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     format: 'table',",
+				"     staged: true,",
+				"     allowCopyCommand: true,",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     errorHandlingOption: 'stopOnFirstError',",
+				"     mapColumn(",
+				"          EmployeeID,",
+				"          LastName,",
+				"          FirstName",
+				"     )) ~> dfsynapseempdb"
+			]
+		}
+	}
+}

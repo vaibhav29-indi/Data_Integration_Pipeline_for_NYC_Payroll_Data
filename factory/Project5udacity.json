@@ -1,0 +1,17 @@
+{
+	"name": "Project5udacity",
+	"properties": {
+		"globalParameters": {
+			"fiscal_year": {
+				"type": "int",
+				"value": 2021
+			}
+		}
+	},
+	"location": "eastus",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "0f7e58d7-8338-4fb0-bfff-afce975ac419",
+		"tenantId": "9b7cbd77-6d6b-4879-8aba-63d7dfb18472"
+	}
+}
