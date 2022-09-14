@@ -1,0 +1,6 @@
+{
+	"fiscal_year": {
+		"type": "int",
+		"value": 2021
+	}
+}
